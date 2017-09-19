@@ -1,0 +1,111 @@
+﻿CREATE TABLE Metal(
+   nimetus VARCHAR(30) PRIMARY KEY,
+   Asutamise_aasta INT,
+   Stuudio_albumite_arv INT,
+   Liikmete_arv INT);
+   
+   
+   INSERT INTO Metal Values ('Metsatöll', '1999', '7', '4');
+   INSERT INTO Metal Values ('Sabaton', '1999', '8', '5');
+   INSERT INTO Metal Values ('Powerwolf', '2003', '6', '5');
+   INSERT INTO Metal Values ('Korpiklaani', '2003', '9', '6');
+   INSERT INTO Metal Values ('Heidevolk', '2002', '5', '5');
+   INSERT INTO Metal Values ('Ensiferum', '1995', '7', '5');
+   INSERT INTO Metal Values ('Alestorm', '2004', '5', '5');
+   INSERT INTO Metal Values ('Tyr', '1998', '7', '3');
+   INSERT INTO Metal Values ('Amon Amarth', '1992', '11', '5');
+   INSERT INTO Metal Values ('Gloryhammer', '2010', '2', '5');
+   
+SELECT * FROM Metal ORDER BY Asutamise_aasta DESC;
++-------------+-----------------+----------------------+--------------+
+| nimetus     | Asutamise_aasta | Stuudio_albumite_arv | Liikmete_arv |
++-------------+-----------------+----------------------+--------------+
+| Gloryhammer |            2010 |                    2 |            5 |
+| Alestorm    |            2004 |                    5 |            5 |
+| Powerwolf   |            2003 |                    6 |            5 |
+| Korpiklaani |            2003 |                    9 |            6 |
+| Heidevolk   |            2002 |                    5 |            5 |
+| Metsatöll   |            1999 |                    7 |            4 |
+| Sabaton     |            1999 |                    8 |            5 |
+| Tyr         |            1998 |                    7 |            3 |
+| Ensiferum   |            1995 |                    7 |            5 |
+| Amon Amarth |            1992 |                   11 |            5 |
++-------------+-----------------+----------------------+--------------+
+
+SELECT * FROM Metal ORDER BY Asutamise_aasta ASC;
++-------------+-----------------+----------------------+--------------+
+| nimetus     | Asutamise_aasta | Stuudio_albumite_arv | Liikmete_arv |
++-------------+-----------------+----------------------+--------------+
+| Amon Amarth |            1992 |                   11 |            5 |
+| Ensiferum   |            1995 |                    7 |            5 |
+| Tyr         |            1998 |                    7 |            3 |
+| Sabaton     |            1999 |                    8 |            5 |
+| Metsatöll   |            1999 |                    7 |            4 |
+| Heidevolk   |            2002 |                    5 |            5 |
+| Powerwolf   |            2003 |                    6 |            5 |
+| Korpiklaani |            2003 |                    9 |            6 |
+| Alestorm    |            2004 |                    5 |            5 |
+| Gloryhammer |            2010 |                    2 |            5 |
++-------------+-----------------+----------------------+--------------+
+
+SELECT AVG(Asutamise_aasta) FROM Metal WHERE Asutamise_aasta<2000;
++----------------------+
+| AVG(Asutamise_aasta) |
++----------------------+
+| 1996.6000            |
++----------------------+
+
+SELECT AVG(Asutamise_aasta) FROM Metal WHERE Asutamise_aasta;
++----------------------+
+| AVG(Asutamise_aasta) |
++----------------------+
+| 2000.5000            |
++----------------------+
+
+SELECT Liikmete_arv FROM Metal GROUP BY Liikmete_arv;
++--------------+
+| Liikmete_arv |
++--------------+
+|            3 |
+|            4 |
+|            5 |
+|            6 |
++--------------+
+
+SELECT AVG(Stuudio_albumite_arv) FROM Metal;
++---------------------------+
+| AVG(Stuudio_albumite_arv) |
++---------------------------+
+| 6.7000                    |
++---------------------------+
+
+SELECT AVG(Stuudio_albumite_arv)/AVG(Liikmete_arv) FROM Metal;
++---------------------------------------------+
+| AVG(Stuudio_albumite_arv)/AVG(Liikmete_arv) |
++---------------------------------------------+
+| 1.39583333                                  |
++---------------------------------------------+
+
+
+SELECT Stuudio_albumite_arv, COUNT(*) FROM Metal GROUP BY Stuudio_albumite_arv;
++----------------------+----------+
+| Stuudio_albumite_arv | COUNT(*) |
++----------------------+----------+
+|                    2 |        1 |
+|                    5 |        2 |
+|                    6 |        1 |
+|                    7 |        3 |
+|                    8 |        1 |
+|                    9 |        1 |
+|                   11 |        1 |
++----------------------+----------+
+
+SELECT Liikmete_arv, COUNT(*) FROM Metal GROUP BY Liikmete_arv;
++--------------+----------+
+| Liikmete_arv | COUNT(*) |
++--------------+----------+
+|            3 |        1 |
+|            4 |        1 |
+|            5 |        7 |
+|            6 |        1 |
++--------------+----------+
